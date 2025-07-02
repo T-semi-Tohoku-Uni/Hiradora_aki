@@ -102,6 +102,7 @@ int main(void)
   while (1)
   {
     printf("hello world\r\n");
+    HAL_GPIO_TogglePin(STATUS_LED_GPIO_Port, STATUS_LED_Pin);
     HAL_Delay(1000);
     /* USER CODE END WHILE */
 
