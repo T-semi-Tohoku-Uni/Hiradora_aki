@@ -59,6 +59,12 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define STATUS_LED_Pin GPIO_PIN_6
 #define STATUS_LED_GPIO_Port GPIOC
+#define Encoder_Z_Pin GPIO_PIN_3
+#define Encoder_Z_GPIO_Port GPIOB
+#define Encoder_A_Pin GPIO_PIN_6
+#define Encoder_A_GPIO_Port GPIOB
+#define Encoder_B_Pin GPIO_PIN_7
+#define Encoder_B_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
