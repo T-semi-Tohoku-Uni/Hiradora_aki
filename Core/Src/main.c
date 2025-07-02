@@ -46,7 +46,7 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-
+volatile int32_t clock = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -65,9 +65,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (&htim17 == htim)
   {
-    HAL_GPIO_TogglePin(STATUS_LED_GPIO_Port, STATUS_LED_Pin);
+    clock = TIM4->CNT;
+    TIM4->CNT = 0; // Reset the encoder counter 
   }
 }
+
 int _write(int file, char *ptr, int len)
 {
     HAL_UART_Transmit(&huart3,(uint8_t *)ptr,len,10);
@@ -116,6 +118,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    printf("%d\r\n", clock);
+    HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
