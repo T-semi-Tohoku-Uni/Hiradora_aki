@@ -63,6 +63,14 @@ static void MX_TIM1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (&htim17 == htim)
+  {
+    int32_t dt = 10; //ms
+  }
+}
+
 int _write(int file, char *ptr, int len)
 {
     HAL_UART_Transmit(&huart3,(uint8_t *)ptr,len,10);
@@ -340,7 +348,7 @@ static void MX_TIM17_Init(void)
 
   /* USER CODE END TIM17_Init 1 */
   htim17.Instance = TIM17;
-  htim17.Init.Prescaler = 9;
+  htim17.Init.Prescaler = 99;
   htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim17.Init.Period = 15999;
   htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
