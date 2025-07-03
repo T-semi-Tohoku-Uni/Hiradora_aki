@@ -111,9 +111,9 @@ int main(void)
   if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
   if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
 
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 500);
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 500);
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 500);
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
