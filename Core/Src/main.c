@@ -67,13 +67,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     clock = TIM4->CNT;
   }
+  else if (&htim4 == htim)
+  {
+    printf("x\r\n");
+  }
 }
 
 void HAL_TIMEx_EncoderIndexCallback(TIM_HandleTypeDef *htim)
 {
   if (&htim4 == htim)
   {
-    HAL_GPIO_TogglePin(STATUS_LED_GPIO_Port, STATUS_LED_Pin);
     printf("x\r\n");
   }
 }
@@ -126,8 +129,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    printf("%d\r\n", clock);
-    HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
