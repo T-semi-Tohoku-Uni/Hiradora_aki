@@ -104,23 +104,22 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
+  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
+  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
   if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
   if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
   if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
+
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 500);
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 500);
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 500);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 200);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 200);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 200);
-    HAL_Delay(5000);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 400);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 400);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 400);
-    HAL_Delay(5000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
