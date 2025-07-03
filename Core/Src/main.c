@@ -104,7 +104,9 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
+  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
+  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -442,6 +444,8 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+    HAL_GPIO_TogglePin(STATUS_LED_GPIO_Port, STATUS_LED_Pin);
+    HAL_Delay(1000);
   }
   /* USER CODE END Error_Handler_Debug */
 }
