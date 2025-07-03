@@ -31,7 +31,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define INITIAL_STATE 0
+#define STATE_1 1
+#define STATE_2 2
+#define STATE_3 3
+#define STATE_4 4
+#define STATE_5 5
+#define STATE_6 6
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,7 +53,7 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-
+uint8_t state = INITIAL_STATE;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,7 +73,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (&htim17 == htim)
   {
-    int32_t dt = 10; //ms
+    uint32_t dt = 10; //ms
+    
   }
 }
 
