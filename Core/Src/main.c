@@ -76,18 +76,37 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     uint32_t dt = 10; //ms
     switch (state)
     {
+    case INITIAL_STATE:
+      break;
     case STATE_1:
-      /* code */
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
       break;
     case STATE_2:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
       break;
     case STATE_3:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
       break;
     case STATE_4:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
       break;
     case STATE_5:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
       break;
     case STATE_6:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
       break;
     default:
       Error_Handler();
