@@ -74,7 +74,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (&htim17 == htim)
   {
     uint32_t dt = 10; //ms
-    
+    switch (state)
+    {
+    case STATE_1:
+      /* code */
+      break;
+    case STATE_2:
+      break;
+    case STATE_3:
+      break;
+    case STATE_4:
+      break;
+    case STATE_5:
+      break;
+    case STATE_6:
+      break;
+    default:
+      Error_Handler();
+      break;
+    }
   }
 }
 
