@@ -122,7 +122,7 @@ int main(void)
   MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim17);
-  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);
+  HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_ALL);
   /* USER CODE END 2 */
 
   /* Infinite loop */
