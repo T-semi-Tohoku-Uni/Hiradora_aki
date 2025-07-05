@@ -75,6 +75,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     uint32_t dt = 10; //ms
     uint32_t on_duty = 100;
+    uint32_t off_duty = 0;
+    uint32_t free_duty = 50;
     switch (state)
     {
     case INITIAL_STATE:
