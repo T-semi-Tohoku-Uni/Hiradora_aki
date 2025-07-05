@@ -74,9 +74,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (&htim17 == htim)
   {
     uint32_t dt = 10; //ms
-    uint32_t on_duty = 1100;
+    uint32_t on_duty = 900;
     uint32_t free_duty = 800;
-    uint32_t off_duty = 500;
+    uint32_t off_duty = 700;
     switch (state)
     {
     case INITIAL_STATE:
@@ -161,22 +161,25 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
-  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
-  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
-  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
-  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
-  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
+  if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
+  if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
+  if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
 
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+
+  if (HAL_TIM_Base_Start_IT(&htim17) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    printf("%d\r\n", state);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
