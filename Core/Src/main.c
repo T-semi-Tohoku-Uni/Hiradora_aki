@@ -161,6 +161,9 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  if (HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_ALL) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_EnableEncoderIndex(&htim4) != HAL_OK) Error_Handler();
+  
   if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
   if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
   if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
@@ -180,7 +183,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    printf("%d\r\n", state);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -372,7 +374,7 @@ static void MX_TIM4_Init(void)
   sEncoderIndexConfig.Polarity = TIM_ENCODERINDEX_POLARITY_NONINVERTED;
   sEncoderIndexConfig.Prescaler = TIM_ENCODERINDEX_PRESCALER_DIV1;
   sEncoderIndexConfig.Filter = 0;
-  sEncoderIndexConfig.FirstIndexEnable = DISABLE;
+  sEncoderIndexConfig.FirstIndexEnable = ENABLE;
   sEncoderIndexConfig.Position = TIM_ENCODERINDEX_POSITION_00;
   sEncoderIndexConfig.Direction = TIM_ENCODERINDEX_DIRECTION_UP_DOWN;
   if (HAL_TIMEx_ConfigEncoderIndex(&htim4, &sEncoderIndexConfig) != HAL_OK)
