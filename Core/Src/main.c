@@ -79,7 +79,7 @@ void HAL_TIMEx_EncoderIndexCallback(TIM_HandleTypeDef *htim)
 {
   if (&htim4 == htim)
   {
-    
+    printf("fire\r\n");
   }
 }
 
@@ -132,6 +132,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    printf("%d\r\n", (int)clock);
+    HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
