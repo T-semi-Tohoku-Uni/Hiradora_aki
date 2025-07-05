@@ -67,11 +67,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (&htim17 == htim)
   {
-    clock = TIM4->CNT;
   }
   else if (&htim4 == htim)
   {
-    
+    printf("fire\r\n");
   }
 }
 
@@ -124,15 +123,16 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim17);
-  HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_ALL);
+  if (HAL_TIM_Base_Start_IT(&htim17) != HAL_OK) Error_Handler();
+  if (HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_ALL) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_EnableEncoderIndex(&htim4) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    printf("%d\r\n", (int)clock);
+    printf("%d\r\n", (int)TIM4->CNT);
     HAL_Delay(100);
     /* USER CODE END WHILE */
 
