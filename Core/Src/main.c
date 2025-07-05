@@ -31,7 +31,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define INITIAL_STATE 0
+#define STATE_1 1
+#define STATE_2 2
+#define STATE_3 3
+#define STATE_4 4
+#define STATE_5 5
+#define STATE_6 6
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,7 +53,7 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-
+uint8_t state = INITIAL_STATE;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,6 +69,57 @@ static void MX_TIM1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (&htim17 == htim)
+  {
+    uint32_t dt = 10; //ms
+    uint32_t on_duty = 900;
+    uint32_t free_duty = 800;
+    uint32_t off_duty = 700;
+    switch (state)
+    {
+    case INITIAL_STATE:
+      break;
+    case STATE_1:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, free_duty);
+      break;
+    case STATE_2:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, off_duty);
+      break;
+    case STATE_3:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, off_duty);
+      break;
+    case STATE_4:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, free_duty);
+      break;
+    case STATE_5:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, on_duty);
+      break;
+    case STATE_6:
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, on_duty);
+      break;
+    default:
+      Error_Handler();
+      break;
+    }
+    state++;
+    if(state > STATE_6) state = STATE_1;
+  }
+}
+
 int _write(int file, char *ptr, int len)
 {
     HAL_UART_Transmit(&huart3,(uint8_t *)ptr,len,10);
@@ -104,22 +161,26 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
-  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
-  if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
-  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
-  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
-  if(HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
+  if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
+  if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
+  if (HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_1) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_2) != HAL_OK) Error_Handler();
+  if (HAL_TIMEx_PWMN_Start(&htim1,TIM_CHANNEL_3) != HAL_OK) Error_Handler();
 
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+
+  HAL_Delay(3000);
+  if (HAL_TIM_Base_Start_IT(&htim17) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    printf("%d\r\n", state);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -340,7 +401,7 @@ static void MX_TIM17_Init(void)
 
   /* USER CODE END TIM17_Init 1 */
   htim17.Instance = TIM17;
-  htim17.Init.Prescaler = 9;
+  htim17.Init.Prescaler = 99;
   htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim17.Init.Period = 15999;
   htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
