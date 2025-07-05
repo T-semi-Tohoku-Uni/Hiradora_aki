@@ -82,34 +82,34 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     case INITIAL_STATE:
       break;
     case STATE_1:
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, free_duty);
       break;
     case STATE_2:
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, off_duty);
       break;
     case STATE_3:
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, off_duty);
       break;
     case STATE_4:
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, on_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, free_duty);
       break;
     case STATE_5:
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, on_duty);
       break;
     case STATE_6:
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, free_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, off_duty);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, on_duty);
       break;
     default:
       Error_Handler();
