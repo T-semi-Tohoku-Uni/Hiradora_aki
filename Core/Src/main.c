@@ -172,6 +172,7 @@ int main(void)
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
 
+  HAL_Delay(3000);
   if (HAL_TIM_Base_Start_IT(&htim17) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
