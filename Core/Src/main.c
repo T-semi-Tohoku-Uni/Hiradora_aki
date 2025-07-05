@@ -47,7 +47,7 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-volatile int32_t clock = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,18 +67,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (&htim17 == htim)
   {
-  }
-  else if (&htim4 == htim)
-  {
-    printf("fire\r\n");
-  }
-}
 
-void HAL_TIMEx_EncoderIndexCallback(TIM_HandleTypeDef *htim)
-{
-  if (&htim4 == htim)
-  {
-    printf("fire\r\n");
   }
 }
 
@@ -132,8 +121,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    printf("%d\r\n", (int)TIM4->CNT);
-    HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
